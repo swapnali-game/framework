@@ -24,5 +24,4 @@ public class LoginPage
 		pass.sendKeys(passApp);
 		loginbtn.click();
 	}
-	
 }
