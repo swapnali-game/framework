@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -40,12 +41,15 @@ public class BaseClass
 		Reporter.log("Setting done. Test can be started",true);
 	}
 	
+	@Parameters({"browser","urlToBeTested"})//this parameter name should match with parameter name in <systemPropertyVariables> tag in pom.xml
 	@BeforeClass
-	public void setup() throws InterruptedException
+	public void setup(String browser, String url) throws InterruptedException
 	{
 		Reporter.log("Trying to start browser and getting application ready",true);
 		
-		driver=BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());//if this statement fails to execute, next line for log will not be executed		
+		//driver=BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingURL());//if this statement fails to execute, next line for log will not be executed		
+		
+		driver=BrowserFactory.startApplication(driver, browser, url);
 		
 		Reporter.log("Browser and Application is up and running",true);
 	}
